@@ -26,8 +26,6 @@ function filter(filter) {
   return filteredData;
 }
 
-filter("ry");
-
 // Count
 function count(array) {
   let numb = 0;
@@ -36,13 +34,16 @@ function count(array) {
 }
 
 function updateData() {
-  data.map((element) => {
-    element.name = `${element.name} [${count(element.people)}]`;
+  data.map((country) => {
+    country.name = `${country.name} [${count(country.people)}]`;
 
-    element.people.map((people) => {
+    country.people.map((people) => {
       people.name = `${people.name} [${count(people.animals)}]`;
     });
   });
 }
 
-updateData();
+module.exports = {
+  filter,
+  updateData,
+};
