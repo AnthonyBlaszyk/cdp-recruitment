@@ -26,4 +26,23 @@ function filter(filter) {
   return filteredData;
 }
 
-console.log(filter("ry"));
+filter("ry");
+
+// Count
+function count(array) {
+  let numb = 0;
+  array.map(() => numb++);
+  return numb;
+}
+
+function updateData() {
+  data.map((element) => {
+    element.name = `${element.name} [${count(element.people)}]`;
+
+    element.people.map((people) => {
+      people.name = `${people.name} [${count(people.animals)}]`;
+    });
+  });
+}
+
+updateData();
