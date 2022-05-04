@@ -1,8 +1,8 @@
 const dataImport = require("./data");
-const data = dataImport.data;
+let data = dataImport.data;
 
 const functions = require("./app");
-count = functions.updateData;
+count = functions.count;
 filterFunction = functions.filter;
 
 const filteredData = [
@@ -63,14 +63,12 @@ describe("Should return only animals containing the pattern passed as argument",
 
 // Test for the count
 describe("Should return only animals containing the pattern passed as argument", function () {
-  test("Should print the number next to the name", () => {
-    count();
-
-    expect(data[0]).toStrictEqual({
-      name: "Dillauti [5]",
+  beforeEach(()=>{
+    data = [{
+      name: "Dillauti",
       people: [
         {
-          name: "Winifred Graham [6]",
+          name: "Winifred Graham",
           animals: [
             { name: "Anoa" },
             { name: "Duck" },
@@ -81,7 +79,7 @@ describe("Should return only animals containing the pattern passed as argument",
           ],
         },
         {
-          name: "Blanche Viciani [8]",
+          name: "Blanche Viciani",
           animals: [
             { name: "Barbet" },
             { name: "Rhea" },
@@ -92,44 +90,44 @@ describe("Should return only animals containing the pattern passed as argument",
             { name: "Guinea Fowl" },
             { name: "Deer Mouse" },
           ],
-        },
-        {
-          name: "Philip Murray [7]",
-          animals: [
-            { name: "Sand Dollar" },
-            { name: "Buzzard" },
-            { name: "Elephant" },
-            { name: "Xenops" },
-            { name: "Dormouse" },
-            { name: "Anchovy" },
-            { name: "Dinosaur" },
-          ],
-        },
-        {
-          name: "Bobby Ristori [9]",
-          animals: [
-            { name: "Kowari" },
-            { name: "Caecilian" },
-            { name: "Common Genet" },
-            { name: "Chipmunk" },
-            { name: "Aardwolf" },
-            { name: "Przewalski's Horse" },
-            { name: "Badger" },
-            { name: "Sand Cat" },
-            { name: "Linne's Two-toed Sloth" },
-          ],
-        },
-        {
-          name: "Louise Pinzauti [5]",
-          animals: [
-            { name: "Manta Ray" },
-            { name: "Nubian Ibex" },
-            { name: "Warbler" },
-            { name: "Duck" },
-            { name: "Mice" },
-          ],
-        },
-      ],
-    });
+        }
+      ]
+    }];
+  })
+
+  afterEach(()=> data = dataImport.data)
+
+  test("Should print the number next to the name", () => {
+    expect(count(data)).toStrictEqual(
+      [{
+        name: "Dillauti [2]",
+        people: [
+          {
+            name: "Winifred Graham [6]",
+            animals: [
+              { name: "Anoa" },
+              { name: "Duck" },
+              { name: "Narwhal" },
+              { name: "Badger" },
+              { name: "Cobra" },
+              { name: "Crow" },
+            ],
+          },
+          {
+            name: "Blanche Viciani [8]",
+            animals: [
+              { name: "Barbet" },
+              { name: "Rhea" },
+              { name: "Snakes" },
+              { name: "Antelope" },
+              { name: "Echidna" },
+              { name: "Crow" },
+              { name: "Guinea Fowl" },
+              { name: "Deer Mouse" },
+            ],
+          }    
+        ],
+      }]
+    );
   });
 });

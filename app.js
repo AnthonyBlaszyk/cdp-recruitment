@@ -26,24 +26,21 @@ function filter(filter) {
   return filteredData;
 }
 
-// Count
-function count(array) {
-  let numb = 0;
-  array.map(() => numb++);
-  return numb;
-}
-
-function updateData() {
+function count(data) {
   data.map((country) => {
-    country.name = `${country.name} [${count(country.people)}]`;
-
+    country.name = `${country.name} [${country.people.length}]`;
+    
     country.people.map((people) => {
-      people.name = `${people.name} [${count(people.animals)}]`;
+      people.name = `${people.name} [${people.animals.length}]`;
+      return people
     });
+    return country
   });
+  return data
 }
+
 
 module.exports = {
   filter,
-  updateData,
+  count,
 };
